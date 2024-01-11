@@ -117,7 +117,7 @@ const putProfile = async (updatedData) => {
       updatedData
     );
     console.log("response.data", response.data);
-    return response.data;
+    return response;
   } catch (e) {
     console.log(e.response.data);
   }
