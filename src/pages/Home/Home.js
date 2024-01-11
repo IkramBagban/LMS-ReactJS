@@ -4,19 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import serv from "../../assets/services.jpg";
 import home3 from "../../assets/home3.jpg";
 import home4 from "../../assets/home4.jpg";
-import { Link, NavLink } from "react-router-dom";
 import home5 from "../../assets/home5.jpg";
 import ios from "../../assets/ios-icon.png";
 import gplay from "../../assets/gplay-icon.png";
-import hilton from "../../assets/hilton.jpg";
-import marriot from "../../assets/marriot.jpg";
-import holidayinn from "../../assets/holiday-inn.jpg";
-import hyatt from "../../assets/hyatt.jpg";
 import logo1 from "../../assets/icons/regular-laundry.png";
 import logo2 from "../../assets/icons/steam-pressing.png";
 import logo3 from "../../assets/icons/curtain-cleaning.png";
 import logo4 from "../../assets/icons/specialized-items.png";
-import classes from "../BookNowPages/Signup.module.css";
 
 function Home() {
   return (

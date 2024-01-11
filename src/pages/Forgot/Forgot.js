@@ -8,18 +8,19 @@ import { postOTP } from "../../api";
 function Forgot() {
   const [email, setEmail] = useState("");
   const [invalid, setInvalid] = useState(false);
+
   const navigate = useNavigate();
 
   const submithandler = async (e) => {
     e.preventDefault();
     try {
       const response = await postOTP({ email });
-      console.log("otp resopnse", response);
       if (response) {
         navigate("/VerifyOTP", { state: { email: email } });
-      } else {
-        setInvalid(true);
+        return;
       }
+      
+      setInvalid(true);
     } catch (error) {
       console.error(error);
     }

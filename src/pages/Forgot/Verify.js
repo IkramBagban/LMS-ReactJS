@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-
 import classes from "../../pages/BookNowPages/Login.module.css";
 import classes1 from "../../pages/BookNowPages/Signup.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,16 +7,9 @@ import { VerifyOTP } from "../../api";
 
 function Verify() {
   const [OTP, setOTP] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
-  //   const submithandler = async (e) => {
-  //     e.preventDefault();
-
-  //     const id = location.state.id;
-  //     if (location.state.otp === OTP) {
-  //       navigate("/NewPassword", { state: { isAuth: 1, id: id } });
-  //     }
-  //   };
 
   const submithandler = async (e) => {
     e.preventDefault();

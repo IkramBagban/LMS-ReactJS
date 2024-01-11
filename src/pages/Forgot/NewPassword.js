@@ -4,58 +4,40 @@ import "bootstrap/dist/css/bootstrap.css";
 import classes from "../../pages/BookNowPages/Login.module.css";
 import classes1 from "../../pages/BookNowPages/Signup.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { putProfile, resetPassword } from "../../api";
-// import { faL } from '@fortawesome/free-solid-svg-icons';
+import { resetPassword } from "../../api";
 
 function NewPassword() {
   const [password, setpassword] = useState("");
-  const [password2, setpassword2] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [invalid, setInvalid] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  //   const submithandler = async (e) => {
-  //     e.preventDefault();
-  //     console.log(location.state.auth);
-  //     if (password === password2) {
-  //       const data = {
-  //         id: location.state.id,
-  //         Password: password,
-  //       };
-  //       try {
-  //         const response = await putProfile(data);
-  //         console.log(response.data);
-  //         navigate("/BookNow");
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     } else {
-  //       setInvalid(true);
-  //     }
-  //   };
-
   const submithandler = async (e) => {
     e.preventDefault();
-    if (password === password2) {
-      const data = {
-        email: location.state.email,
-        Password: password,
-        confirmPassword: password2,
-      };
-      try {
-        const response = await resetPassword(data);
-        console.log(response);
-        if (response.status === 200) {
-            console.log(response.status)
-          navigate("/BookNow");
-        } else {
-            alert('password reseting failed')
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
+    if (password !== confirmPassword) {
       setInvalid(true);
+      return;
+    }
+    
+    const data = {
+      email: location.state.email,
+      Password: password,
+      confirmPassword: confirmPassword,
+    };
+
+    try {
+      const response = await resetPassword(data);
+
+      if (response.status === 200) {
+        navigate("/BookNow");
+        return;
+      }
+
+      alert("password reseting failed");
+    } catch (error) {
+      console.error(error);
     }
   };
   return (
@@ -90,7 +72,7 @@ function NewPassword() {
                     type="text"
                     placeholder="Enter new password"
                     className={classes["input-field"]}
-                    onChange={(e) => setpassword2(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
 

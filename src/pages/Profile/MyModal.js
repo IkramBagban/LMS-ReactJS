@@ -1,23 +1,19 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import styles from "./MyModal.module.css";
-import classes from "./MyModal.module.css";
 
 function MyModal({ showModal, handleCloseModal, orderDetails }) {
   const getModeFromDeliveryStatus = (deliveryStatus) => {
-    if (deliveryStatus === "1") {
-      return "Standard";
-    } else if (deliveryStatus === "2") {
-      return "Express";
-    } else if (deliveryStatus === "3") {
-      return "SameDay";
-    } else {
-      return "Unknown"; // You can set a default value here if needed
-    }
+    const deliveryObj = {
+      1: "Standard",
+      2: "Express",
+      3: "SameDay",
+    };
+
+    return deliveryObj[deliveryStatus] || "unknown";
   };
 
   let noOfItems = 0;
-
   const totalItems = orderDetails.order_item?.map((item) => {
     const price = parseFloat(item.Price);
     const total = price;

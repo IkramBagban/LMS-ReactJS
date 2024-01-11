@@ -3,14 +3,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import classes from "./Profile.module.css";
 import { useState, useEffect } from "react";
 import { getCustomers, putProfile } from "../../api";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function GuestProfile() {
-  const location = useLocation();
   const customerData = useSelector((state) => state.guest.customerData);
-  console.log(typeof customerData["email"]);
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
 
   const [input, setInput] = useState({
     first_name: "",
@@ -23,25 +19,18 @@ function GuestProfile() {
     email: "",
   });
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const data = await getCustomers();
+        const customers = await getCustomers();
         const email = customerData.email;
 
-        console.log(data);
-        data.some((obj) => {
-          if (obj.email == email) {
-            setInput(obj);
-            console.log(obj);
-            return true;
-          } else {
-            console.log("doesnt work");
-            return false;
-          }
-        });
+        if (!customers) {
+          console.log("Customers Not fetched");
+        }
+
+        const currentCustomer = customers.find((obj) => obj.email === email);
+        setInput(currentCustomer);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -55,11 +44,11 @@ function GuestProfile() {
     console.log(input);
     try {
       const response = await putProfile(input);
-      //localStorage.setItem('address',input.address)
     } catch (error) {
       console.error(error);
     }
   };
+  
   const inputhandler = (input, value) => {
     setInput((prevInput) => {
       return {
