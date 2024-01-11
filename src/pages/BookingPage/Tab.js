@@ -15,28 +15,16 @@ function Tab({ onCategoryChange, loading }) {
   const [isActive, setActiveTab] = useState(1);
 
   const handleTabClick = (tabNumber) => {
-    console.log("tab number", tabNumber);
+    const categoryMapping = {
+      1: "Men",
+      2: "Ladies",
+      3: "Kids",
+      4: "Home",
+      5: "Pick Up & Delivery",
+    };
+    const selectedCategory = categoryMapping[tabNumber] || "Men";
     setActiveTab(tabNumber);
-    // Call the onCategoryChange function with the selected category
-    switch (tabNumber) {
-      case 1:
-        onCategoryChange("Men");
-        break;
-      case 2:
-        onCategoryChange("Ladies");
-        break;
-      case 3:
-        onCategoryChange("Kids");
-        break;
-      case 4:
-        onCategoryChange("Home");
-        break;
-      case 5:
-        onCategoryChange("Pick Up & Delivery");
-        break;
-      default:
-        onCategoryChange("Men"); // If none of the above, set category to null
-    }
+    onCategoryChange(selectedCategory);
   };
 
   return (
@@ -87,8 +75,8 @@ function Tab({ onCategoryChange, loading }) {
             onClick={() => handleTabClick(4)}
             className={
               isActive === 4
-              ? `${classes.activeNavLink} col`
-              : `${classes.navLink} col`
+                ? `${classes.activeNavLink} col`
+                : `${classes.navLink} col`
             }
             href
             style={{ cursor: "pointer" }} // Add this line to change cursor to pointer

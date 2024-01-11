@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./TotalFooter.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import classes2 from "../BookNowPages/Signup.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateTotalPrice,
@@ -29,7 +29,6 @@ function TotalFooter({ Data }) {
     // Format the totalPrice to have two decimal places
     const formattedTotalPrice = totalPrice.toFixed(2);
     setTotal(formattedTotalPrice);
-    // console.log("Total Quantity:", totalQuantity);
     dispatch(updateTotalPrice(totalPrice));
     dispatch(updateTotalQuantity(totalQuantity));
     console.log("Total Price:", totalPrice);

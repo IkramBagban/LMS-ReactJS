@@ -3,49 +3,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
 import classes from "../../pages/BookNowPages/Login.module.css";
 import classes1 from "../../pages/BookNowPages/Signup.module.css";
-import { getCustomers, postOTP } from "../../api";
+import { postOTP } from "../../api";
 
 function Forgot() {
   const [email, setEmail] = useState("");
   const [invalid, setInvalid] = useState(false);
   const navigate = useNavigate();
-  // const submithandler=async(e)=>{
-  //     e.preventDefault();
-  //     console.log(email)
-  //     const timestamp = Date.now().toString();
-  //     const otp=timestamp.substr(7,12)
-  //    console.log(otp)
-  //     try {
-  //         const response = await getCustomers();
-
-  //         const matchingObj = response.find((obj) => Object.values(obj).includes(email));
-  //         if (matchingObj) {
-  //           const id = matchingObj['id'];
-  //           console.log('API 1 working');
-  //           const dataToSend = {
-  //             customer_id: id,
-  //             email: email,
-  //             otp:otp,
-  //             id: Math.random().toString(36).substr(2, 9),
-  //           };
-  //           const sendEmail = await getOTP(dataToSend);
-  //           console.log('API 2 working', sendEmail);
-  //           navigate('/VerifyOTP',{state:{otp:otp,id:id,email:email}})
-  //         } else {
-  //           setInvalid(true);
-  //         }
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  // }
 
   const submithandler = async (e) => {
     e.preventDefault();
     try {
       const response = await postOTP({ email });
-      console.log("otp resopnse", response)
+      console.log("otp resopnse", response);
       if (response) {
-        navigate("/VerifyOTP", { state: {email: email } });
+        navigate("/VerifyOTP", { state: { email: email } });
       } else {
         setInvalid(true);
       }

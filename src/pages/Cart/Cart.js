@@ -85,10 +85,7 @@ function Cart() {
   const handleDelete = (ide) => {
     dispatch(removeItemFromCart({ ide }));
   };
-  useEffect(() => {
-    // Update the local quantity state when the Redux totalQuantity changes
-    // setQuantity(totalQuantity);
-  }, [totalQuantity]);
+
 
   const handleIncrement = (
     ide,
